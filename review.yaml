@@ -1,0 +1,132 @@
+requests:
+  - id: insert_new_review
+    type:  MongoDBInsertOne
+    connectionId: my_collection
+    properties:
+      doc:
+        name:
+          _state: review_name
+        food:
+          _state: review_food_stars
+        service:
+          _state: review_service_stars
+        atmosphere:
+          _state: review_atmosphere_stars
+        overall:
+          _state: review_overall_stars
+        extra:
+          _state: review_extra
+        timestamp:
+          _date: now
+
+id: review
+type: PageHeaderMenu
+properties:
+  title: Review Us # The title in the browser tab.
+layout:
+  contentJustify: center # Center the contents of the page.
+blocks:
+  - id: content_card
+    type: Card
+    layout:
+      size: 800 # Set the size of the card so it does not fill the full screen.
+      contentGutter: 16 # Make a 16px gap between all blocks in this card.
+    blocks:
+      - id: page_heading
+        type: Title
+        properties:
+          content: Leave a Review # Change the title on the page.
+          level: 3 # Make the title a little smaller (an html `<h3>`).
+
+      - id: review_name
+        type: TextInput
+        required: true
+        properties:
+          title: Name
+
+      - id: review_food_stars
+        type: RatingSlider
+        required: true
+        properties:
+          title: How was the food
+          min: 1 # Set the allowed options
+          max: 5
+          notApplicableLabel: 0
+
+      - id: review_service_stars
+        type: RatingSlider
+        required: true
+        properties:
+          title: How was the service
+          min: 1 # Set the allowed options
+          max: 5
+          notApplicableLabel: 0
+
+      - id: review_atmosphere_stars
+        type: RatingSlider
+        required: true
+        properties:
+          title: How was the atmosphere
+          min: 1 # Set the allowed options
+          max: 5
+          notApplicableLabel: 0
+
+      - id: review_overall_stars
+        type: RatingSlider
+        required: true
+        properties:
+          title: How would you rate us overall
+          min: 1 # Set the allowed options
+          max: 5
+          notApplicableLabel: 0
+
+      - id: review_visit_again
+        type: ButtonSelector
+        required: true
+        properties:
+          title: Would you visit us again?
+          options: # Set the allowed options
+            - Yes
+            - No
+
+      - id: review_extra
+        type: TextArea
+        properties:
+          title: Any additional comments
+
+      - id: reset_button
+        type: Button
+        layout:
+          span: 12 # Set the size of the button (span 12 of 24 columns)
+        properties:
+          title: Reset
+          block: true # Make the button fill all the space available to it
+          type: default # Make the button a plain button
+          icon: ClearOutlined
+        events:
+          onClick:
+            - id: reset
+              type: Reset
+
+      - id: submit_button
+        type: Button
+        layout:
+          span: 12
+        properties:
+          title: Submit
+          block: true
+          type: primary # Make the button a primary button with color
+          icon: SaveOutlined
+        events:
+          onClick:
+            - id: validate
+              type: Validate
+            - id: call_one_request
+              type: Request
+              params: insert_new_review
+            - id: success_message
+              type: Message
+              params:
+                content: Success
+            - id: reset
+              type: Reset
