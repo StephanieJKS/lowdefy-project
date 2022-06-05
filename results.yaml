@@ -134,16 +134,12 @@ areas:
           - id: pie_chart_food
             type: AmChartsPie
             properties:
-              height: 300
+              height: 280
               data:
                 _request: count_stars_food # Share the same request as the bar chart
               series:
                 - type: PieSeries
-                  alignLabels: false  # Needed for bent labels
-                  ticks:
-                    disabled: true # Remove label ticks
                   labels:
-                    bent: true
                     fontSize: 12
                     text: "{category}"
                   dataFields:
@@ -167,16 +163,12 @@ areas:
           - id: pie_chart_service
             type: AmChartsPie
             properties:
-              height: 300
+              height: 280
               data:
                 _request: count_stars_service # Share the same request as the bar chart
               series:
                 - type: PieSeries
-                  alignLabels: false  # Needed for bent labels
-                  ticks:
-                    disabled: true # Remove label ticks
                   labels:
-                    bent: true
                     fontSize: 12
                     text: "{category}"
                   dataFields:
@@ -200,16 +192,12 @@ areas:
           - id: pie_chart_atmosphere
             type: AmChartsPie
             properties:
-              height: 300
+              height: 280
               data:
                 _request: count_stars_atmosphere # Share the same request as the bar chart
               series:
                 - type: PieSeries
-                  alignLabels: false  # Needed for bent labels
-                  ticks:
-                    disabled: true # Remove label ticks
                   labels:
-                    bent: true
                     fontSize: 12
                     text: "{category}"
                   dataFields:
@@ -233,16 +221,12 @@ areas:
           - id: pie_chart_overall
             type: AmChartsPie
             properties:
-              height: 300
+              height: 280
               data:
                 _request: count_stars_overall # Share the same request as the bar chart
               series:
                 - type: PieSeries
-                  alignLabels: false  # Needed for bent labels
-                  ticks:
-                    disabled: true # Remove label ticks
                   labels:
-                    bent: true
                     fontSize: 12
                     text: "{category}"
                   dataFields:
@@ -269,7 +253,7 @@ areas:
             layout:
               align: middle
             style:
-              height: 300
+              height: 280
             properties:
               column: 1
               itemOptions: []
@@ -305,17 +289,14 @@ areas:
           - id: pie_chart_visit_again
             type: AmChartsPie
             properties:
-              height: 300
+              height: 280
               data:
                 _request: count_visit_again # Share the same request as the bar chart
               series:
                 - type: PieSeries
-                  alignLabels: false  # Needed for bent labels
-                  ticks:
-                    disabled: true # Remove label ticks
                   labels:
                     bent: true
-                    fontSize: 12
+                    fontSize: 14
                     text: "{category}"
                   dataFields:
                     category: _id
