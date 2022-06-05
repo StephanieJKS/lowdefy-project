@@ -1,11 +1,11 @@
-id: results
+id: ratings
 type: PageHeaderMenu
 properties:
   logo:
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
-  title: What others think of us # The title in the browser tab.
+  title: Ratings # The title in the browser tab.
 layout:
   contentGutter: 16
   contentJustify: center # Center the contents of the page.

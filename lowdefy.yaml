@@ -30,12 +30,12 @@ connections:
 menus:
   - id: default
     links:
-      - id: welcome
+      - id: home
         type: MenuLink
         properties:
           icon: HomeOutlined
           title: Home
-        pageId: welcome
+        pageId: home
 
       - id: review
         type: MenuLink
@@ -44,12 +44,12 @@ menus:
           title: Review Us
         pageId: review
 
-      - id: results
+      - id: ratings
         type: MenuLink
         properties:
           icon: BarChartOutlined
           title: Ratings
-        pageId: results
+        pageId: ratings
 
       - id: written_reviews # Define the menu link that directs to the report page
         type: MenuLink

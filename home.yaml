@@ -1,11 +1,11 @@
-id: welcome
+id: home
 type: PageHeaderMenu
 properties:
   logo:
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
-  title: Welcome
+  title: Home
   
 areas:
   content:
