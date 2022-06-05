@@ -6,6 +6,9 @@ properties:
     style:
       height: 50
   title: Ratings # The title in the browser tab.
+  header:
+    theme: dark
+    color: '#002B24'
 layout:
   contentGutter: 16
   contentJustify: center # Center the contents of the page.

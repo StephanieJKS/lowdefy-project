@@ -28,6 +28,9 @@ properties:
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
+  header:
+    theme: dark
+    color: '#002B24'
   title: Review Us # The title in the browser tab.
 
 areas:
