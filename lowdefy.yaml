@@ -4,9 +4,9 @@ name: Lowdefy starter
 
 types:
   AmChartsXY:
-    url: https://blocks-cdn.lowdefy.com/v3.10.1/blocks-amcharts/meta/AmChartsXY.json
+    url: https://blocks-cdn.lowdefy.com/v3.11.3/blocks-amcharts/meta/AmChartsXY.json
   AmChartsPie:
-    url: https://blocks-cdn.lowdefy.com/v3.10.1/blocks-amcharts/meta/AmChartsPie.json
+    url: https://blocks-cdn.lowdefy.com/v3.11.3/blocks-amcharts/meta/AmChartsPie.json
   AgGridAlpine:
     url: https://blocks-cdn.lowdefy.com/v3.10.1/blocks-aggrid/meta/AgGridAlpine.json
 
@@ -48,63 +48,19 @@ menus:
         type: MenuLink
         properties:
           icon: BarChartOutlined
-          title: What Others Think Of Us
+          title: Ratings
         pageId: results
 
-      - id: report # Define the menu link that directs to the report page
+      - id: written_reviews # Define the menu link that directs to the report page
         type: MenuLink
-        pageId: report # Id of the report page
+        pageId: written_reviews # Id of the report page
         properties:
-          title: Report # Title to show on the menu
-          icon: LineChartOutlined
+          title: Written Reviews # Title to show on the menu
+          icon: FileTextFilled
 
 pages:
   - _ref: review.yaml
   - _ref: results.yaml
-  - _ref: report.yaml
-  - id: welcome
-    type: PageHeaderMenu
-    properties:
-      title: Welcome
-    areas:
-      content:
-        justify: center
-        blocks:
-          - id: content_card
-            type: Card
-            style:
-              maxWidth: 800
-            blocks:
-              - id: content
-                type: Result
-                properties:
-                  title: Welcome to your Lowdefy app
-                  subTitle: We are excited to see what you are going to build
-                  icon:
-                    name: HeartTwoTone
-                    color: '#f00'
-                areas:
-                  extra:
-                    blocks:
-                      - id: docs_button
-                        type: Button
-                        properties:
-                          size: large
-                          title: Let's build something
-                          color: '#1890ff'
-                        events:
-                          onClick:
-                            - id: link_to_docs
-                              type: Link
-                              params:
-                                url: https://docs.lowdefy.com
-                                newTab: true
-      footer:
-        blocks:
-          - id: footer
-            type: Paragraph
-            properties:
-              type: secondary
-              content: |
-                Made by a Lowdefy 🤖
+  - _ref: written_reviews.yaml
+  - _ref: home.yaml
 

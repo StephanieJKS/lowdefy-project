@@ -1,0 +1,97 @@
+id: written_reviews
+type: PageHeaderMenu
+properties:
+  logo:
+    src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
+    style:
+      height: 50
+  title: Ratings # The title in the browser tab.
+layout:
+  contentGutter: 16
+  contentJustify: center # Center the contents of the page.
+
+requests:
+  # Request for the bar and pie charts
+  - id: get_reviews
+    type: MongoDBFind # MongoDB Aggregation to get the data
+    connectionId: my_collection
+    properties:
+      query:
+        extra:
+          $ne: null
+      options:
+        sort:
+          - - date
+            - -1
+        projection:
+          name: 1
+          extra: 1
+          overall: 1
+          date: 1
+
+events:
+  # A list of actions that gets completed when this page is first loaded. 
+  onInitAsync:
+    - id: fetch_data # Fetch the request data before the page renders in order to populate the charts
+      type: Request
+      params: 
+        - get_reviews
+
+    - id: set_reviews
+      type: SetState
+      params:
+        review_list:
+          _request: get_reviews
+
+areas:
+  content:
+    blocks:
+      - id: title # Title on page
+        type: Title
+        properties:
+          content: Reviews
+          level: 2
+
+      - id: reviews_card
+        type: Card
+        style:
+          maxWidth: 1100
+        blocks:
+        - id: review_list # A List block to render the following blocks for all items in the product_list page state variable.
+          type: List
+          blocks: 
+            - id: review_list.$.container # Wrap all the blocks for a brand item in a box.
+              type: Comment
+              properties:
+                avatar:
+                  color: "#077368"
+              blocks:
+                - id: review_list.$.name # Show the item name as a title in the list.
+                  type: Title
+                  properties:
+                    content: 
+                      _state: review_list.$.name
+                    level: 3
+                - id: review_card
+                  type: Card
+                  blocks:
+                  - id: review_list.$.overall # Show the item description as a paragraph in the list.
+                    type: Title
+                    properties:
+                      content: 
+                        _state: review_list.$.overall
+                      level: 4
+                  - id: review_list.$.extra # Show the item description as a paragraph in the list.
+                    type: Paragraph
+                    properties:
+                      content: 
+                        _state: review_list.$.extra
+
+  footer:
+    blocks:
+      - id: footer
+        type: Paragraph
+        properties:
+          type: secondary
+          content: |
+            Made using Lowdefy

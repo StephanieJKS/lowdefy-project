@@ -1,0 +1,76 @@
+id: welcome
+type: PageHeaderMenu
+properties:
+  logo:
+    src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
+    style:
+      height: 50
+  title: Welcome
+  
+areas:
+  content:
+    justify: center
+    blocks:
+      - id: content_card
+        type: Card
+        style:
+          maxWidth: 1000
+          padding: 60px
+        blocks:
+          - id: title_block
+            type: Title
+            style:
+              text-align: center
+            properties:
+              content: PIZZA HOUSE
+              underline: true
+
+          - id: image_block
+            type: Img
+            style:
+              padding: 20px
+              display: flex
+              justify-content: center
+            properties:
+              src: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWKuqvAocaFglV7VoDFQR53r-xc9O8YX3bA&usqp=CAU
+              width: 500
+
+
+          - id: intro_paragraph
+            type: Paragraph
+            style:
+              text-align: center
+            properties:
+              content: >-
+                We are Pizza House! Proud makers and lovers of pizza.
+                Please take a look around. Why not leave a review, here we encourage judgement!
+                Once you're finished, why not head down to our store for some freshly made pizza!
+                Have a great day and we thank you for stopping by.
+
+          - id: review_button
+            type: Button
+            style:
+              padding: 20px
+              display: flex
+              justify-content: center
+            properties:
+              shape: round
+              size: medium
+              title: Leave A Review
+              color: "#077368"
+            events:
+              onClick:
+                - id: link_to_docs
+                  type: Link
+                  params:
+                    url: http://localhost:3000/review
+                    newTab: false
+
+  footer:
+    blocks:
+      - id: footer
+        type: Paragraph
+        properties:
+          type: secondary
+          content: |
+            Made using Lowdefy
