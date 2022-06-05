@@ -1,14 +1,14 @@
 id: home
 type: PageHeaderMenu
 properties:
-  logo:
+  logo: # Change the logo displayed in the menu
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
-  header:
+  header: # Change the colour of the menu
     theme: dark
     color: '#002B24'
-  title: Home
+  title: Home # The title in the browser tab
   
 areas:
   content:
@@ -38,7 +38,6 @@ areas:
               src: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWWKuqvAocaFglV7VoDFQR53r-xc9O8YX3bA&usqp=CAU
               width: 500
 
-
           - id: intro_paragraph
             type: Paragraph
             style:
@@ -50,7 +49,7 @@ areas:
                 Once you're finished, why not head down to our store for some freshly made pizza!
                 Have a great day and we thank you for stopping by.
 
-          - id: review_button
+          - id: review_button # Button to redirect user to review page
             type: Button
             style:
               padding: 20px

@@ -1,9 +1,22 @@
-requests:
+id: review
+type: PageHeaderMenu
+properties:
+  logo: # Change the logo displayed in the menu
+    src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
+    style:
+      height: 50
+  header: # Change the colour of the menu
+    theme: dark
+    color: '#002B24'
+  title: Review Us # The title in the browser tab
+
+requests: 
+  # Request for to create new document in collection
   - id: insert_new_review
-    type:  MongoDBInsertOne
+    type:  MongoDBInsertOne # MongoDB Insert One to insert document
     connectionId: my_collection
     properties:
-      doc:
+      doc: # set relevant data with corresponding input fields
         name:
           _state: review_name
         food:
@@ -21,18 +34,6 @@ requests:
         timestamp:
           _date: now
 
-id: review
-type: PageHeaderMenu
-properties:
-  logo:
-    src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
-    style:
-      height: 50
-  header:
-    theme: dark
-    color: '#002B24'
-  title: Review Us # The title in the browser tab.
-
 areas:
   content:
     justify: center
@@ -40,55 +41,55 @@ areas:
       - id: content_card
         type: Card
         layout:
-          size: 800 # Set the size of the card so it does not fill the full screen.
-          contentGutter: 16 # Make a 16px gap between all blocks in this card.
+          size: 800 # Set the size of the card so it does not fill the full screen
+          contentGutter: 16 # Make a 16px gap between all blocks in this card
         blocks:
           - id: page_heading
             type: Title
             properties:
-              content: Leave a Review # Change the title on the page.
-              level: 2 # Make the title a little smaller (an html `<h3>`).
+              content: Leave a Review # Change the title on the page
+              level: 2 # Make the title a smaller (an html `<h2>`)
 
-          - id: review_name
+          - id: review_name # Input field for name of reviewer
             type: TextInput
             required: true
             properties:
               title: Name
 
-          - id: review_food_stars
+          - id: review_food_stars # Rating slider for food rating
             type: RatingSlider
             required: true
             properties:
               title: How was the food
-              min: 1 # Set the allowed options
-              max: 5
+              min: 1 # Set the min allowed option
+              max: 5 # Set the max allowed option
               notApplicableLabel: 0
 
-          - id: review_service_stars
+          - id: review_service_stars # Rating slider for service rating
             type: RatingSlider
             required: true
             properties:
               title: How was the service
-              min: 1 # Set the allowed options
-              max: 5
+              min: 1 # Set the min allowed option
+              max: 5 # Set the max allowed opt
               notApplicableLabel: 0
 
-          - id: review_atmosphere_stars
+          - id: review_atmosphere_stars # Rating slider for atmosphere rating
             type: RatingSlider
             required: true
             properties:
               title: How was the atmosphere
-              min: 1 # Set the allowed options
-              max: 5
+              min: 1 # Set the min allowed option
+              max: 5 # Set the max allowed opt
               notApplicableLabel: 0
 
-          - id: review_overall_stars
+          - id: review_overall_stars # Rating slider for overall rating
             type: RatingSlider
             required: true
             properties:
               title: How would you rate us overall
-              min: 1 # Set the allowed options
-              max: 5
+              min: 1 # Set the min allowed option
+              max: 5 # Set the max allowed opt
               notApplicableLabel: 0
 
           - id: review_visit_again
@@ -100,7 +101,7 @@ areas:
                 - Yes
                 - No
 
-          - id: review_extra
+          - id: review_extra # Text area for additional comments
             type: TextArea
             properties:
               title: Any additional comments
@@ -115,7 +116,7 @@ areas:
               type: default # Make the button a plain button
               icon: ClearOutlined
             events:
-              onClick:
+              onClick: # Resets all input fields
                 - id: reset
                   type: Reset
 
@@ -130,7 +131,7 @@ areas:
               icon: SaveOutlined
               color: "#077368"
             events:
-              onClick:
+              onClick: # First validates data, performs request, displays message and then clears input fields
                 - id: validate
                   type: Validate
                 - id: call_one_request

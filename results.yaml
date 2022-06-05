@@ -1,33 +1,35 @@
 id: ratings
 type: PageHeaderMenu
 properties:
-  logo:
+  logo: # Change the logo displayed in the menu
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
-  title: Ratings # The title in the browser tab.
-  header:
+  title: Ratings # The title in the browser tab
+  header: # Change the colour of the menu
     theme: dark
     color: '#002B24'
 layout:
   contentGutter: 16
-  contentJustify: center # Center the contents of the page.
+  contentJustify: center # Center the contents of the page
 
 requests:
-  # Request for the bar and pie charts
+  # Request for food rating pie chart
+  # Returns amount each unique rating appears
   - id: count_stars_food
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
     properties:
       pipeline:
         - $group:
-            _id: $food # Group data by the genre field
+            _id: $food # Group data by the food field
             count: 
-              $sum: 1 # Count the number of documents by summing 1 for every documentewerRating
+              $sum: 1 # Count the number of documents by summing 1 for every document
         - $sort:
             _id: 1
 
-  # Request for the bar and pie charts
+  # Request for service rating pie chart
+  # Returns amount each unique rating appears
   - id: count_stars_service
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
@@ -40,7 +42,8 @@ requests:
         - $sort:
             _id: 1
 
-  # Request for the bar and pie charts
+  # Request for atmospher rating pie chart
+  # Returns amount each unique rating appears
   - id: count_stars_atmosphere
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
@@ -53,7 +56,8 @@ requests:
         - $sort:
             _id: 1
 
-  # Request for the bar and pie charts
+  # Request for overall rating pie chart
+  # Returns amount each unique rating appears
   - id: count_stars_overall
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
@@ -66,7 +70,8 @@ requests:
         - $sort:
             _id: 1
 
-  # Request for the bar and pie charts
+  # Request for visit again pie chart
+  # Returns amount each unique answer appears
   - id: count_visit_again
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
@@ -79,26 +84,27 @@ requests:
         - $sort:
             _id: -1
 
-  # Request for the bar and pie charts
+  # Request for getting the average ratings
+  # Returns average value for each rating
   - id: get_ave
     type: MongoDBAggregation # MongoDB Aggregation to get the data
     connectionId: my_collection
     properties:
       pipeline:
         - $group:
-            _id: null # Group data by the genre field
+            _id: null # Do not group data by field
             ave_food:
-              $avg: $food # Count the number of documents by summing 1 for every documentewerRating
+              $avg: $food # return average of food field
             ave_service: 
-              $avg: $service
+              $avg: $service # return average of service field
             ave_atmosphere:
-              $avg: $atmosphere
+              $avg: $atmosphere # return average of atmosphere field
             ave_overall:
-              $avg: $overall
+              $avg: $overall # return average of overall field
 
 events:
-  # A list of actions that gets completed when this page is first loaded. 
-  onInitAsync:
+  # A list of actions that gets completed each time the page is opened
+  onEnter:
     - id: fetch_data # Fetch the request data before the page renders in order to populate the charts
       type: Request
       params: 
@@ -109,7 +115,7 @@ events:
         - count_visit_again
         - get_ave
 
-    - id: set_averages
+    - id: set_averages # Create state to save data from get_ave request to be used as a list
       type: SetState
       params:
         average_list:
@@ -124,7 +130,7 @@ areas:
           content: Ratings
           level: 2
 
-      - id: pie_chart_card_food
+      - id: pie_chart_card_food # Pie chart for food ratings
         type: Card
         layout:
           span: 5
@@ -153,7 +159,7 @@ areas:
                       - "#034D44"
                       - "#002B24"
 
-      - id: pie_chart_card_service
+      - id: pie_chart_card_service # Pie chart for service ratings
         type: Card
         layout:
           span: 5
@@ -165,7 +171,7 @@ areas:
             properties:
               height: 280
               data:
-                _request: count_stars_service # Share the same request as the bar chart
+                _request: count_stars_service # get data from request
               series:
                 - type: PieSeries
                   labels:
@@ -182,7 +188,7 @@ areas:
                       - "#034D44"
                       - "#002B24"
 
-      - id: pie_chart_card_atmosphere
+      - id: pie_chart_card_atmosphere # Pie chart for atmosphere ratings
         type: Card
         layout:
           span: 5
@@ -194,7 +200,7 @@ areas:
             properties:
               height: 280
               data:
-                _request: count_stars_atmosphere # Share the same request as the bar chart
+                _request: count_stars_atmosphere # get data from request
               series:
                 - type: PieSeries
                   labels:
@@ -211,7 +217,7 @@ areas:
                       - "#034D44"
                       - "#002B24"
 
-      - id: pie_chart_card_overall
+      - id: pie_chart_card_overall # Pie chart for overall ratings
         type: Card
         layout:
           span: 5
@@ -223,7 +229,7 @@ areas:
             properties:
               height: 280
               data:
-                _request: count_stars_overall # Share the same request as the bar chart
+                _request: count_stars_overall # get data from request
               series:
                 - type: PieSeries
                   labels:
@@ -240,7 +246,7 @@ areas:
                       - "#034D44"
                       - "#002B24"
       
-      - id: average_ratings
+      - id: average_ratings # Display average ratings
         type: Card
         style:
           maxWidth: 380
@@ -257,7 +263,7 @@ areas:
             properties:
               column: 1
               itemOptions: []
-              items:
+              items: # Get data from saved list
                 - label: Food
                   value: 
                     _state: average_list.0.ave_food
@@ -279,7 +285,7 @@ areas:
                   span: null
                   style: null
 
-      - id: pie_chart_card_visit_again
+      - id: pie_chart_card_visit_again # Pie chart for visit again
         type: Card
         layout:
           span: 5
@@ -291,7 +297,7 @@ areas:
             properties:
               height: 280
               data:
-                _request: count_visit_again # Share the same request as the bar chart
+                _request: count_visit_again # get data from request
               series:
                 - type: PieSeries
                   labels:

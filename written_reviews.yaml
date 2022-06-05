@@ -1,46 +1,45 @@
 id: written_reviews
 type: PageHeaderMenu
 properties:
-  logo:
+  logo: # Change the logo displayed in the menu
     src: https://t4.ftcdn.net/jpg/03/12/53/09/240_F_312530923_wxvZKwzM1Dl5APTugPDEXCvTgsV0y3gl.jpg
     style:
       height: 50
-  title: Written Reviews # The title in the browser tab.
-  header:
+  title: Written Reviews # The title in the browser tab
+  header: # Change the colour of the menu
     theme: dark
     color: '#002B24'
 layout:
   contentGutter: 16
-  contentJustify: center # Center the contents of the page.
+  contentJustify: center # Center the contents of the page
 
 requests:
-  # Request for the bar and pie charts
+  # Request to get the data of the reviews where the extra comments section was filled in
   - id: get_reviews
-    type: MongoDBFind # MongoDB Aggregation to get the data
+    type: MongoDBFind # MongoDB Find to get the data
     connectionId: my_collection
     properties:
       query:
         extra:
-          $ne: null
+          $ne: null # where extra field is not null
       options:
         sort:
-          - - date
+          - - overall # sort by rating, best to worst
             - -1
-        projection:
+        projection: # specify which fields should be returned
           name: 1
           extra: 1
           overall: 1
-          date: 1
 
 events:
-  # A list of actions that gets completed when this page is first loaded. 
-  onInitAsync:
-    - id: fetch_data # Fetch the request data before the page renders in order to populate the charts
+  # A list of actions that gets completed each time the page is opened. 
+  onEnter:
+    - id: fetch_data # Fetch the request data before the page renders in order to populate the reviews
       type: Request
       params: 
         - get_reviews
 
-    - id: set_reviews
+    - id: set_reviews # Save results from get_reviews as a list to be accessed later
       type: SetState
       params:
         review_list:
@@ -60,16 +59,16 @@ areas:
         style:
           maxWidth: 1100
         blocks:
-        - id: review_list # A List block to render the following blocks for all items in the product_list page state variable.
+        - id: review_list # A List block to render the following blocks for all items in the review_list page state variable
           type: List
           blocks: 
-            - id: review_list.$.container # Wrap all the blocks for a brand item in a box.
+            - id: review_list.$.container # Wrap all the blocks for a brand item in a comment block
               type: Comment
               properties:
                 avatar:
                   color: "#077368"
               blocks:
-                - id: review_list.$.name # Show the item name as a title in the list.
+                - id: review_list.$.name # Show the reviewer's name as a title
                   type: Title
                   properties:
                     content: 
@@ -78,13 +77,13 @@ areas:
                 - id: review_card
                   type: Card
                   blocks:
-                  - id: review_list.$.overall # Show the item description as a paragraph in the list.
+                  - id: review_list.$.overall # Show the overall rating as a smaller title
                     type: Title
                     properties:
                       content: 
                         _state: review_list.$.overall
                       level: 4
-                  - id: review_list.$.extra # Show the item description as a paragraph in the list.
+                  - id: review_list.$.extra # Show the review comment as a paragraph
                     type: Paragraph
                     properties:
                       content: 

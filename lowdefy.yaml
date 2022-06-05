@@ -26,33 +26,33 @@ connections:
 menus:
   - id: default
     links:
-      - id: home
+      - id: home # Define the menu link that directs to the home page
         type: MenuLink
         properties:
-          icon: HomeOutlined
-          title: Home
-        pageId: home
+          icon: HomeOutlined  
+          title: Home # Title to show on the menu
+        pageId: home  # Id of the page
 
-      - id: review
+      - id: review # Define the menu link that directs to the review page
         type: MenuLink
         properties:
           icon: EditOutlined
-          title: Review Us
-        pageId: review
+          title: Review Us  # Title to show on the menu
+        pageId: review  # Id of the page
 
-      - id: ratings
+      - id: ratings # Define the menu link that directs to the ratings page
         type: MenuLink
         properties:
           icon: BarChartOutlined
-          title: Ratings
-        pageId: ratings
+          title: Ratings  # Title to show on the menu
+        pageId: ratings # Id of the page
 
-      - id: written_reviews # Define the menu link that directs to the report page
+      - id: written_reviews # Define the menu link that directs to the written reviews page
         type: MenuLink
-        pageId: written_reviews # Id of the report page
         properties:
           title: Written Reviews # Title to show on the menu
           icon: FileTextFilled
+        pageId: written_reviews # Id of the page
 
 pages:
   - _ref: review.yaml
