@@ -22,4 +22,4 @@ This Lowdefy application consists of four pages
 
 Note: 
 * In the `home.yaml` file, line 68 should be changed as needed. Must be the url of the "Review Us" page.
-* The "resuls" and "written reviews" pages do not handle the case for when the "reviews" collection is empty in an elegant fashion. This means that the objects are rendered without any data, i.e empty pie charts and empty containers.
+* The "ratings" and "written reviews" pages do not handle the case for when the "reviews" collection is empty in an elegant fashion. This means that the objects are rendered without any data, i.e empty pie charts and empty containers.
