@@ -19,3 +19,7 @@ This Lowdefy application consists of four pages
 * Clone this repository.
 * Create a .env file in your project folder and set your MongoDB database connector URI as a variable in the .env file: `MONGODB_URI = {{ your_mongodb_connection_uri }}`
 * In the command console, navigate to your project folder and run the Lowdefy CLI: `npx lowdefy@latest dev`.
+
+Note: 
+* In the `home.yaml` file, line 68 should be changed as needed. Must be the url of the "Review Us" page.
+* The "resuls" and "written reviews" pages do not handle the case for when the "reviews" collection is empty in an elegant fashion. This means that the objects are rendered without any data, i.e empty pie charts and empty containers.

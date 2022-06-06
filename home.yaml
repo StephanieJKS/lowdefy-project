@@ -65,7 +65,7 @@ areas:
                 - id: link_to_docs
                   type: Link
                   params:
-                    url: http://localhost:3000/review
+                    url: http://localhost:3000/review # Link to review page, should be updated as required
                     newTab: false
 
   footer:
